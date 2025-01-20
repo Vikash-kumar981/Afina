@@ -8,7 +8,10 @@ function enqueue_css() {
   wp_enqueue_style('custom-fonts', get_template_directory_uri() . '/assets/arial-font/arial.ttf', array(), null, 'all');
   wp_enqueue_style('custom-global', get_template_directory_uri() . '/assets/css/style.css', array(), null, 'all');
   wp_enqueue_style('custom-category-css', get_template_directory_uri() . '/assets/css/category.css', array(), null, 'all');
-}
+
+  if (is_single()) {
+    wp_enqueue_style('post-detail', get_stylesheet_directory_uri() . '/assets/css/single.css', array(), '1.0.0', 'all');
+  }}
 add_action('wp_enqueue_scripts', 'enqueue_css');
 
 function enqueue_script()
@@ -452,4 +455,39 @@ function enqueue_cat_load_more_scripts() {
   ));
 }
 
-add_action('wp_enqueue_scripts', 'enqueue_cat_load_more_scripts');
+add_action('wp_enqueue_scripts', 'enqueue_cat_load_more_scripts'); 
+
+
+// comments code
+function custom_comments_callback($comment, $args, $depth) {
+  ?>
+  <li <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>">
+      <div class="comment-body">
+          <div class="comment-avatar">
+              <?php echo get_avatar($comment, 60); // Display avatar ?>
+          </div>
+          <div class="comment-content">
+              <h4 class="comment-author"><?php comment_author(); ?></h4>
+              <div class="comment-text"><?php comment_text(); ?></div>
+              <p class="comment-meta"><?php echo get_the_date('h:ia, d M Y'); ?></p>
+          </div>
+      </div>
+
+      <div class="comment-reply">
+          <?php
+          comment_reply_link(array_merge($args, array(
+              'reply_text' => __('Reply'),
+              'depth'      => $depth,
+              'max_depth'  => $args['max_depth'],
+          )));
+          ?>
+      </div>
+  </li>
+  <?php
+}
+function custom_comment_form($args) {
+  $args['submit_button'] = '<button name="%1$s" type="submit" id="%2$s" class="%3$s">%4$s</button>'; // Custom button structure
+  $args['label_submit'] = 'Post >'; // Change the button text here
+  return $args;
+}
+add_filter('comment_form_defaults', 'custom_comment_form');

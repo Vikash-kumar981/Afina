@@ -100,9 +100,13 @@ get_header();
                             <?php 
                             $featured_img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
                             if($featured_img_url) : ?>
-                                <img src="<?php echo esc_url($featured_img_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" class="img-fluid">
+                                <a href="<?php echo esc_url(get_permalink()); ?>">
+                                    <img src="<?php echo esc_url($featured_img_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" class="img-fluid">
+                                </a>
                             <?php else : ?>
-                                <img src="<?php echo get_template_directory_uri(); ?>/images/Featured-img-top.png" alt="Featured-top img" class="img-fluid">
+                                <a href="<?php echo esc_url(get_permalink()); ?>">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/images/Featured-img-top.png" alt="Featured-top img" class="img-fluid">
+                                </a>
                             <?php endif; ?>
                         </div>
                         <div class="featured-post-desc">
@@ -316,11 +320,17 @@ get_header();
                         ?>
                                 <div class="product-card">
                                     <div class="product-card-img">
-                                        <?php the_post_thumbnail('large', ['class' => 'img-fluid']); ?>
+                                        <a href="<?php echo esc_url($visit_link); ?>" target="_blank">
+                                            <?php the_post_thumbnail('large', ['class' => 'img-fluid']); ?>
+                                        </a>
                                     </div>
                                     <div class="product-card-content">
-                                      <h6><?php the_title(); ?></h6>
-                                      <h5><?php echo esc_html($subtitle); ?></h5>
+                                        <a href="<?php echo esc_url($visit_link); ?>" target="_blank">
+                                            <h6><?php the_title(); ?></h6>
+                                        </a>
+                                         <a href="<?php echo esc_url($visit_link); ?>" target="_blank">
+                                            <h5><?php echo esc_html($subtitle); ?></h5>
+                                        </a>
                                         <p>$<?php echo esc_html($price); ?></p>
                                         <a href="<?php echo esc_url($visit_link); ?>" target="_blank">Visit Site <img src="<?php echo get_template_directory_uri(); ?>/assets/images/next_arrow.svg" alt="arrow"></a>
                                     </div>

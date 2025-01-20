@@ -5,7 +5,24 @@ function openMenu() {
 function closeMenu() {
   document.getElementById('sideMenu').style.right = '-326px';
 }
-
+jQuery(document).ready(function($) {
+  $('.menu button.btn').click(function(){
+      $('body').addClass('overlay');
+  });
+  $('.close-btn').click(function(){
+      $('body').removeClass('overlay');
+  });
+});
+jQuery(document).ready(function($) {
+  $('.src-toggle').click(function(){
+      $('.src-form-div').addClass('active');
+      $('body').addClass('overlay');
+  });
+  $('.src-close').click(function(){
+      $('.src-form-div').removeClass('active');
+      $('body').removeClass('overlay');
+  });
+});
 // Ensure the document is ready before initializing the carousel
 jQuery(document).ready(function($) {
   $('.owl-carousel-hero').owlCarousel({

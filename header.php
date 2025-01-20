@@ -15,8 +15,9 @@
         <div class="container">
            <div class="header-content">
             <div class="header-title">
+                <!-- <h1>The Skin Edit</h1> -->
                 <?php
-                // Fetch the custom logo
+                
                 $custom_logo_id = get_theme_mod('custom_logo');
                 $logo = wp_get_attachment_image_src($custom_logo_id, 'full');
                 ?>
@@ -30,7 +31,27 @@
             </div>
             <div class="haeder-icons">
                 <div class="search">
-                    <img src="<?php echo get_stylesheet_directory_uri();?>/assets/images/search.svg" alt="search">
+                    <div class="src-toggle">
+                        <img src="<?php echo get_stylesheet_directory_uri();?>/assets/images/search.svg" alt="search">
+                    </div>
+                    <div class="src-form-div">
+                        <div class="src-close">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 512.021 512.021" style="enable-background:new 0 0 512.021 512.021;" xml:space="preserve" width="512" height="512">
+                            <g>
+                                <path d="M301.258,256.01L502.645,54.645c12.501-12.501,12.501-32.769,0-45.269c-12.501-12.501-32.769-12.501-45.269,0l0,0   L256.01,210.762L54.645,9.376c-12.501-12.501-32.769-12.501-45.269,0s-12.501,32.769,0,45.269L210.762,256.01L9.376,457.376   c-12.501,12.501-12.501,32.769,0,45.269s32.769,12.501,45.269,0L256.01,301.258l201.365,201.387   c12.501,12.501,32.769,12.501,45.269,0c12.501-12.501,12.501-32.769,0-45.269L301.258,256.01z"/>
+                            </g>
+                        </svg>
+                        </div>
+                        <form role="search" method="get" class="search-form" action="<?php echo home_url('/'); ?>">
+                            <label>
+                                <span class="screen-reader-text"><?php _e('Search for:', 'textdomain'); ?></span>
+                                <input type="search" class="search-field" placeholder="<?php esc_attr_e('Search...', 'textdomain'); ?>" value="<?php echo get_search_query(); ?>" name="s" />
+                            </label>
+                            <button type="submit" class="search-submit">
+                                <?php _e('Search', 'textdomain'); ?>
+                            </button>
+                        </form>
+                    </div>
                 </div>
                 <div class="header-divider">
                     
